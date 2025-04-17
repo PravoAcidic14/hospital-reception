@@ -1,0 +1,59 @@
+.form-header {
+  background-color: #004466;
+  color: white;
+  padding: 15px 20px;
+  text-align: center;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  margin-top: 20px;
+  max-width: 950px;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 20px;
+}
+
+.form-box {
+  max-width: 900px;
+  margin: 30px auto;
+  padding: 25px;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  background-color: #ffffff;
+}
+
+.home-card-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+
+.home-card {
+  width: 250px;
+  padding: 20px;
+  border: 2px solid #004466;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+  text-align: center;
+  background-color: #f8f9fa;
+}
+
+.home-card:hover {
+  background-color: #e6f7ff;
+  border-color: #00bcd4;
+  transform: translateY(-5px);
+}
+
+.home-card h3 {
+  margin: 0 0 10px;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.home-card p {
+  font-size: 15px;
+  color: #333;
+} 

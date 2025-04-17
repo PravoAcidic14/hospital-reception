@@ -1,0 +1,35 @@
+<h3>Admission Records</h3>
+
+<mat-table [dataSource]="admissions" class="mat-elevation-z8">
+
+  <!-- Patient Name Column -->
+  <ng-container matColumnDef="patientName">
+    <mat-header-cell *matHeaderCellDef> Patient Name </mat-header-cell>
+    <mat-cell *matCellDef="let admission"> {{ admission.patientName }} </mat-cell>
+  </ng-container>
+
+  <!-- Admission Type Column -->
+  <ng-container matColumnDef="admissionType">
+    <mat-header-cell *matHeaderCellDef> Admission Type </mat-header-cell>
+    <mat-cell *matCellDef="let admission"> {{ admission.admissionType }} </mat-cell>
+  </ng-container>
+
+  <!-- Bed Number Column (only for Inpatients) -->
+  <ng-container matColumnDef="bedNumber">
+    <mat-header-cell *matHeaderCellDef> Bed No </mat-header-cell>
+    <mat-cell *matCellDef="let admission">
+      <span *ngIf="admission.admissionType === 'Inpatient'">{{ admission.bedNumber }}</span>
+    </mat-cell>
+  </ng-container>
+
+  <!-- Admission Date Column -->
+  <ng-container matColumnDef="admissionDate">
+    <mat-header-cell *matHeaderCellDef> Admission Date </mat-header-cell>
+    <mat-cell *matCellDef="let admission"> {{ admission.admissionDate }} </mat-cell>
+  </ng-container>
+
+  <!-- Table Header and Row Definitions -->
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+
+</mat-table>

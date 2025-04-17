@@ -1,0 +1,86 @@
+.full-header {
+  width: 100%;
+  background-color: #549ee2ad; /* Your chosen blue */
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 30px;
+  box-sizing: border-box;
+  font-family: 'Arial', sans-serif;
+  margin-bottom: 10px;
+}
+
+/* Shared for both left and right sections */
+.left-section,
+.right-section {
+  display: flex;
+  align-items: center;
+}
+
+/* Logo image on the left */
+.header-logo {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin-right: 15px;
+  border: 2px solid white;
+  object-fit: cover;
+}
+
+/* User image on the right */
+.header-user {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  margin-left: 10px;
+  border: 2px solid white;
+  object-fit: cover;
+}
+
+/* Text next to logo */
+.title-text {
+  font-size: 25px;
+  font-weight: bold;
+}
+
+/* Text next to user image */
+.user-id {
+  font-size: 12px;
+  font-weight: bold;
+  margin-left: 10px;
+}
+
+/* Navigation Bar Styles */
+.navbar {
+  background-color: #2e2e2e;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.nav-list {
+  display: flex;
+  justify-content: center;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-list li {
+  margin: 0 20px;
+}
+
+.nav-list a {
+  display: inline-block;
+  padding: 15px 0;
+  color: white;
+  font-weight: bold;
+  font-size: 17px;
+  text-decoration: none;
+  border-bottom: 3px solid transparent;
+  transition: all 0.3s ease;
+}
+
+.nav-list a:hover {
+  border-bottom: 3px solid #00bcd4; /* Underline on hover */
+  color: #00bcd4; /* Cyan on hover */
+}
