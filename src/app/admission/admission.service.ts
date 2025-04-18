@@ -14,4 +14,9 @@ export class AdmissionService {
   createAdmission(admissionData: any): Observable<any> {
     return this.http.post(this.baseUrl, admissionData);
   }
+
+  // (Optional) GET: Fetch all admissions
+  getAdmissions(): Observable<any> {
+    return this.http.get(this.baseUrl);
+  }
 }
