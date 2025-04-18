@@ -1,31 +1,18 @@
 <div class="full-header">
-  <!-- Left Side: Logo + Title -->
-  <div class="left-section">
-    <img src="assets/logo.png" alt="Jalil Logo" class="header-logo">
+  <div class="center-section">
     <span class="title-text">Jalil Healthcare Center</span>
-  </div>
-
-  <!-- Right Side: User ID + Profile Picture -->
-  <div class="right-section">
-    <span class="user-id">User ID: AD124</span>
-    <img src="assets/userPic.jpg" alt="User Photo" class="header-user">
   </div>
 </div>
 
 <!-- Navigation Bar -->
 <nav class="navbar">
   <ul class="nav-list">
-    <nav class="navbar">
-      <ul class="nav-list">
-    
-        <!-- ✅ Only show Home link if NOT on homepage -->
-        <li *ngIf="router.url !== '/'">
-          <a routerLink="/">Home</a>
-        </li>
-    
-        <li><a routerLink="/patient-registration">Registration</a></li>
-        <li><a routerLink="/admission">Admission</a></li>
-        <li><a routerLink="/insurance-claim">Insurance Claims</a></li>
-    
-      </ul>
-    </nav>    
+    <!-- ✅ Only show Home link if NOT on homepage -->
+    <li *ngIf="router.url !== '/'">
+      <a routerLink="/">Home</a>
+    </li>
+    <li><a routerLink="/patient-registration">Registration</a></li>
+    <li><a routerLink="/admission">Admission</a></li>
+    <li><a routerLink="/insurance-claim">Insurance Claims</a></li>
+  </ul>
+</nav>    
