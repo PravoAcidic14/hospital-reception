@@ -1,21 +1,19 @@
-import { Component, effect, EventEmitter, OnInit } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { FormsModule, NgForm } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { MatButtonModule, MatIconButton } from '@angular/material/button';
+import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatMomentDateModule, MomentDateAdapter } from '@angular/material-moment-adapter';
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE, MatDateFormats } from '@angular/material/core';
-import { AdmissionTableComponent } from '../admission-table/admission-table.component';
 import { MatSelectModule } from '@angular/material/select';
-import { Admission } from '../admission.model';
+import { MatIconModule } from '@angular/material/icon';
 import { MatTableModule } from '@angular/material/table';
-import { MatTableDataSource } from '@angular/material/table';
-import { MatIconModule } from '@angular/material/icon'
+import { Admission } from '../admission.model';
 import { AdmissionService } from '../admission.service';
-import { Types } from 'mongoose';
+import { AdmissionTableComponent } from '../admission-table/admission-table.component';
 
 export const MY_DATE_FORMATS: MatDateFormats = {
   parse: {
@@ -32,6 +30,8 @@ export const MY_DATE_FORMATS: MatDateFormats = {
 @Component({
   selector: 'app-admission-form',
   standalone: true,
+  templateUrl: './admission-form.component.html',
+  styleUrls: ['./admission-form.component.css'],
   imports: [
     CommonModule,
     FormsModule,
@@ -44,91 +44,98 @@ export const MY_DATE_FORMATS: MatDateFormats = {
     MatSelectModule,
     MatIconModule,
     MatTableModule,
+    AdmissionTableComponent
   ],
   providers: [
     { provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE] },
     { provide: MAT_DATE_FORMATS, useValue: MY_DATE_FORMATS }
-  ],
-  templateUrl: './admission-form.component.html',
-  styleUrls: ['./admission-form.component.css']
+  ]
 })
 export class AdmissionFormComponent implements OnInit {
-  beds: number[] = Array.from({ length: 50 }, (_, i) => i + 1); // 1–50
+  
+  beds: number[] = Array.from({ length: 50 }, (_, i) => i + 1);
 
   admission: Admission = {
-    _id: '',
     patientName: '',
     admissionDate: '',
     admissionType: '',
     bedNumber: undefined
   };
 
-  searchTerm: string = ''; // Search term for filtering admissions
+  admissions: Admission[] = [];     // Full list of admissions
+  filteredAdmissions: Admission[] = []; // Filtered admissions for search
 
-  admissions = new MatTableDataSource<Admission>([]); // Initialize with an empty array);
+  constructor(private admissionService: AdmissionService) {}
 
-  constructor(private admissionService: AdmissionService) { 
-    effect(() => {
-      this.admissions.data = this.admissionService.admissions$(); // Update table data when the signal changes
+  ngOnInit(): void {
+    this.admissionService.getAdmissions().subscribe((admissions: Admission[]) => {
+      this.admissions = admissions;
+      this.filteredAdmissions = admissions;
     });
+  
+    // 👇 Add this part to listen for edit mode
+    this.admissionService.getEditAdmission().subscribe((admission: Admission | null) => {
+      if (admission) {
+        this.admission = { ...admission };
+      }
+    });
+  }  
+
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value.trim().toLowerCase();
+    this.filteredAdmissions = this.admissions.filter(admission =>
+      admission.patientName.toLowerCase().includes(filterValue)
+    );
   }
 
-  ngOnInit() {// Fetch admissions on component load
-    this.admissionService.getAdmissions();
-  }
-
-  applyFilter() {
-    this.admissions.filter = this.searchTerm.trim().toLowerCase(); // Filter admissions based on search term
-  } 
-
-  onEdit(admission: Admission) {
-    // Need to build a pop up modal to allow users to edit the admission details
-    // once done with the modal, the user can click on a button to save the changes
-    // and then can call the updateAdmission method to update the admission details
-  }
-
-  onDelete(admissionId: string) {
-    if (confirm('Are you sure you want to delete this admission?')) {
-      console.log('Deleting admission:', admissionId);
-      this.admissionService.deleteAdmission(admissionId).subscribe(
-        (response) => {
-          console.log('Admission deleted successfully:', response);
-          this.admissionService.getAdmissions(); // Refresh the admissions list
-          alert('Admission Deleted Successfully!');
-        },
-        (error) => {
-          console.error('Error deleting admission:', error);
-          alert('Error deleting admission');
-        }
-      );
+  onSubmit(form: NgForm) {
+    if (form.valid) {
+      if ((this.admission as any)._id) {
+        // Editing existing admission
+        this.admissionService.updateAdmission(this.admission).subscribe(() => {
+          this.reloadAdmissions();
+          alert('Admission Updated Successfully!');
+          this.resetForm();
+        });
+      } else {
+        // Creating new admission
+        this.admissionService.addAdmission(this.admission).subscribe(() => {
+          this.reloadAdmissions();
+          alert('Patient Admitted Successfully!');
+          this.resetForm();
+        });
+      }
+    } else {
+      console.log('Form is invalid!');
     }
   }
 
-  onSubmit() {
-    this.admissionService.createAdmission(this.admission).subscribe(
-      (response) => {
-        console.log('Admission created successfully:', response);
-        this.admissionService.getAdmissions();
-        alert('Patient Admitted Successfully!');
-        this.resetForm(); // Reset the form after successful submission
-      },
-      (error) => {
-        console.error('Error creating admission:', error);
-        alert('Error creating admission');
-      }
-    );
-  }    
+  editAdmission(admission: Admission) {
+    this.admission = { ...admission };
+  }
+
+  deleteAdmission(id: string) {
+    if (confirm('Are you sure you want to delete this admission?')) {
+      this.admissionService.deleteAdmission(id).subscribe(() => {
+        this.reloadAdmissions();
+        alert('Admission Deleted Successfully!');
+      });
+    }
+  }
 
   resetForm() {
     this.admission = {
-      _id: '',
       patientName: '',
       admissionDate: '',
       admissionType: '',
       bedNumber: undefined
     };
+  }
 
-    this.searchTerm = ''; // Reset search term
-    this.admissions.filter = ''; // Clear the filter
+  reloadAdmissions() {
+    this.admissionService.getAdmissions().subscribe((admissions: Admission[]) => {
+      this.admissions = admissions;
+      this.filteredAdmissions = admissions;
+    });
   }
 }

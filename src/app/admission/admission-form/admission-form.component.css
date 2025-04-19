@@ -43,6 +43,16 @@
   margin-top: 20px;
 }
 
+.button-container {
+  text-align: center; /* Center the button horizontally */
+  margin-top: 20px;   /* Add spacing above button */
+}
+
+button[type="submit"] {
+  padding: 10px 30px; /* Optional: make the button a bit bigger */
+  font-weight: bold;
+}
+
 .submit-button:hover {
   background-color: #006699;
   color: white;

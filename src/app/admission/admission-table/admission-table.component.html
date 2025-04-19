@@ -1,6 +1,5 @@
-<h3>Admission Records</h3>
-
-<mat-table [dataSource]="admissions" class="mat-elevation-z8">
+<!-- Admission Table Structure -->
+<mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
   <!-- Patient Name Column -->
   <ng-container matColumnDef="patientName">
@@ -14,21 +13,30 @@
     <mat-cell *matCellDef="let admission"> {{ admission.admissionType }} </mat-cell>
   </ng-container>
 
-  <!-- Bed Number Column (only for Inpatients) -->
+  <!-- Bed Number Column -->
   <ng-container matColumnDef="bedNumber">
     <mat-header-cell *matHeaderCellDef> Bed No </mat-header-cell>
     <mat-cell *matCellDef="let admission">
-      <span *ngIf="admission.admissionType === 'Inpatient'">{{ admission.bedNumber }}</span>
+      {{ admission.admissionType === 'Inpatient' ? admission.bedNumber : '-' }}
     </mat-cell>
   </ng-container>
 
   <!-- Admission Date Column -->
   <ng-container matColumnDef="admissionDate">
     <mat-header-cell *matHeaderCellDef> Admission Date </mat-header-cell>
-    <mat-cell *matCellDef="let admission"> {{ admission.admissionDate }} </mat-cell>
+    <mat-cell *matCellDef="let admission"> {{ admission.admissionDate | date: 'dd/MM/yyyy' }} </mat-cell>
   </ng-container>
 
-  <!-- Table Header and Row Definitions -->
+  <!-- Actions Column -->
+  <ng-container matColumnDef="actions">
+    <mat-header-cell *matHeaderCellDef> Actions </mat-header-cell>
+    <mat-cell *matCellDef="let admission">
+      <button mat-button color="primary" (click)="editAdmission(admission)">Edit</button>
+      <button mat-button color="warn" (click)="deleteAdmission(admission._id)">Delete</button>
+    </mat-cell>
+  </ng-container>
+
+  <!-- Header and Row Declarations -->
   <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
   <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
 

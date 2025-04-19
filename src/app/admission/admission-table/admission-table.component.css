@@ -1,39 +1,60 @@
-/* Style the entire mat-table */
+h2 {
+  margin: 0;
+  font-size: 18px;
+  color: #004466;
+  padding-left: 20px;
+  padding-right: 20px;
+  margin-bottom: 10px;
+}
+
+mat-form-field {
+  width: 100%;
+  max-width: 300px;
+  margin: 0 20px 10px 20px;
+}
+
 mat-table {
   width: 100%;
-  margin-top: 20px;
   background-color: white;
   border-radius: 8px;
   overflow: hidden;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
-/* Header row styling */
 mat-header-row, mat-header-cell {
-  background-color: #004466; /* Dark blue */
+  background-color: #004466;
   color: white;
   font-weight: bold;
 }
 
-/* Header cell specifically */
 mat-header-cell {
   font-size: 14px;
-  padding: 16px 12px;
+  padding: 12px 8px;
   text-align: center;
 }
 
-/* Data rows styling */
 mat-row {
   border-bottom: 1px solid #eee;
 }
 
-/* Data cells */
 mat-cell {
-  padding: 16px 12px;
+  padding: 12px 8px;
   text-align: center;
 }
 
-/* Optional hover effect on row */
 mat-row:hover {
   background-color: #f1f1f1;
+}
+
+button {
+  background-color: white;
+  color: #004466;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #004466;
+  color: white;
 }
