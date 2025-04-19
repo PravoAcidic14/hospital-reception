@@ -11,7 +11,6 @@ import { MatNativeDateModule } from '@angular/material/core'; // Importing Angul
 import { PatientTableComponent } from '../patient-table/patient-table.component';
 import { Patient } from '../patient.model'; // Import the Patient interface
 import { PatientService } from '../patient.service'; // Import the PatientService
-import { HttpClientModule } from '@angular/common/http';
 import { Subscription } from 'rxjs'; // Import Subscription for managing subscriptions
 
 
@@ -34,8 +33,6 @@ import { Subscription } from 'rxjs'; // Import Subscription for managing subscri
     MatDatepickerModule,
     MatNativeDateModule,
     PatientTableComponent,
-    HttpClientModule
-
   ],
 })
 export class PatientRegistrationFormComponent implements OnInit, OnDestroy { 
@@ -111,7 +108,7 @@ export class PatientRegistrationFormComponent implements OnInit, OnDestroy {
   // This is used to reset the form after successful registration
   private createEmptyPatient(): Patient { 
     return {
-      id: undefined, // ID is set to null initially
+      id: undefined,
       name: '',
       dob: '',
       gender: '',

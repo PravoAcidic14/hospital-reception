@@ -60,11 +60,11 @@ export class PatientService {
       });
   }
 
-  //Liatening for updates to the patients data
+  //Listening for updates to the patients data
   getPatientUpdateListener() {
     return this.patientUpdated.asObservable(); // Return an observable for patient updates
   }
-  //Selecting a claim for viewing or editing
+  //Selecting a patient for viewing or editing
   setEditPatient(patient: Patient) {
     this.editPatientSubject.next(patient); 
   }

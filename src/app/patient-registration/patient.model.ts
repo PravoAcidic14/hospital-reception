@@ -1,6 +1,6 @@
 // Patient interface to define the structure of patient data
 export interface Patient { 
-    id?: string; // 
+    id?: string; 
     name: string;
     dob: string; 
     gender: string;

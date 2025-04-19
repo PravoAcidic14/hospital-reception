@@ -65,4 +65,5 @@ h2 { /* Header for the component */
   
   button:hover {
     background-color: #004466;  /* lighter on hover */
+    color: white;
   }
