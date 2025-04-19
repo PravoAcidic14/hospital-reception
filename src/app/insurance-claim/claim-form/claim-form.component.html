@@ -1,0 +1,95 @@
+<!-- Section Header -->
+<div class="form-header">
+    <h2>Insurance Claims Management</h2>
+    <p>Please fill in the form below to submit a claim.</p>
+  </div>
+  
+  <!-- Insurance Claim Form -->
+  <mat-card class="form-box">
+    <form #claimForm="ngForm" (ngSubmit)="submitClaim(claimForm)" class="form-content">
+  
+      <!-- Name -->
+      <mat-form-field appearance="fill" class="full-width">
+        <!-- Name Label-->
+        <mat-label>Name</mat-label>
+        <!-- Name Input Field-->
+        <input matInput type="text" name="name" [(ngModel)]="claim.name" #name="ngModel" required />
+        <!-- Name Error Message-->
+        <mat-error *ngIf="name.invalid && name.touched">Name is required.</mat-error>
+      </mat-form-field>
+  
+      <div class="row">
+        <!-- Insurance Provider -->
+        <mat-form-field appearance="fill" class="half-width">
+          <!-- Insurance Provider Label-->
+          <mat-label>Insurance Provider</mat-label>
+          <!-- Insurance Provider Input Field-->
+          <input matInput type="text" name="provider" [(ngModel)]="claim.provider" #provider="ngModel" required />
+          <!-- Insurance Provider Error Message-->
+          <mat-error *ngIf="provider.invalid && provider.touched">Provider is required.</mat-error>
+        </mat-form-field>
+  
+        <!-- Policy Number -->
+        <mat-form-field appearance="fill" class="half-width">
+          <!-- Policy Number Label-->
+          <mat-label>Policy Number</mat-label>
+          <!-- Policy Number Input Field-->
+          <input matInput type="text" name="policyNumber" [(ngModel)]="claim.policyNumber" #policyNumber="ngModel" required />
+          <!-- Policy Number Error Message-->
+          <mat-error *ngIf="policyNumber.invalid && policyNumber.touched">Policy Number is required.</mat-error>
+        </mat-form-field>
+      </div>
+  
+      <div class="row">
+            <!-- Claim Amount -->
+        <mat-form-field appearance="fill" class="half-width">
+          <!-- Claim Amount Label-->
+          <mat-label>Claim Amount</mat-label>
+          <!-- Claim Amount Input Field-->
+          <input matInput type="text" name="amount" [(ngModel)]="claim.amount" #amount="ngModel" required />
+          <!-- Claim Amount Error Message-->
+          <mat-error *ngIf="amount.invalid && amount.touched">Amount is required.</mat-error>
+        </mat-form-field>
+  
+        <!-- Date Issued -->
+        <mat-form-field appearance="fill" class="half-width">
+          <!-- Date Issued Label-->
+          <mat-label>Date Issued</mat-label>
+          <!-- Date Issued Input Field-->
+          <input matInput [matDatepicker]="issuedPicker" name="dateIssued" [(ngModel)]="claim.dateIssued" #dateIssued="ngModel" required />
+          <mat-hint>MM/DD/YYYY</mat-hint>
+          <mat-datepicker-toggle matSuffix [for]="issuedPicker"></mat-datepicker-toggle>
+          <mat-datepicker #issuedPicker></mat-datepicker>
+          <!-- Date Issued Error Message-->
+          <mat-error *ngIf="dateIssued.invalid && dateIssued.touched">Date Issued is required.</mat-error>
+        </mat-form-field>
+      </div>
+  
+      <!-- Status Dropdown -->
+      <mat-form-field appearance="fill" class="full-width">
+        <!-- Status Label-->
+        <mat-label>Status</mat-label>
+        <!-- Status Dropdown-->
+        <mat-select name="status" [(ngModel)]="claim.status" #status="ngModel" required>
+          <mat-option value="" disabled>Select Status</mat-option>
+          <mat-option value="Pending">Pending</mat-option>
+          <mat-option value="Approved">Approved</mat-option>
+          <mat-option value="Rejected">Rejected</mat-option>
+        </mat-select>
+        <!-- Status Error Message-->
+        <mat-error *ngIf="status.invalid && status.touched">Status is required.</mat-error>
+      </mat-form-field>
+  
+      <!-- Submit Button -->
+      <div class="button-container">
+        <button mat-raised-button color="primary" type="submit" [disabled]="claimForm.invalid">
+          Submit
+        </button>
+      </div>
+  
+    </form>
+  </mat-card>
+  
+  <!-- Claim Table Display -->
+  <hr />
+  <app-claim-table [claims]="claims"></app-claim-table>

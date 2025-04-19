@@ -1,0 +1,55 @@
+/* Style for Claim Record (h3) */
+h2 {
+    margin: 0; /* Remove default margin */
+    font-size: 18px;                      
+    color: #004466;
+    padding-left: 20px; /* Add left padding */              
+    padding-right: 20px; /* Add right padding */            
+    margin-bottom: 10px; /* Add bottom margin */          
+  }
+  
+  /* Style for the filter input field */
+  mat-form-field {
+    width: 100%; /* Full width for the input field */
+    max-width: 300px; /* Limit the maximum width */            
+    margin: 0 20px 10px 20px; /* Add margin for spacing */   
+  }
+  
+  /* Style the entire mat-table */
+  mat-table {
+    width: 100%;
+    background-color: white;
+    border-radius: 8px; /* Rounded corners */
+    overflow: hidden; /* Hide overflow */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Shadow effect */
+  }
+  
+  /* Header row styling */
+  mat-header-row, mat-header-cell {
+    background-color: #004466; 
+    color: white;
+    font-weight: bold; /* Bold text */
+  }
+  
+  /* Header cell specifically */
+  mat-header-cell {
+    font-size: 14px;
+    padding: 12px 8px;  
+    text-align: center; /* Centered text */
+  }
+  
+  /* Data rows styling */
+  mat-row {
+    border-bottom: 1px solid #eee; /* Light border between rows */
+  }
+  
+  /* Data cells */
+  mat-cell {
+    padding: 12px 8px;  
+    text-align: center;
+  }
+  
+  /* Optional hover effect on row */
+  mat-row:hover {
+    background-color: #f1f1f1;
+  }

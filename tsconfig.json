@@ -19,6 +19,9 @@
     "target": "ES2022",
     "module": "ES2022"
   },
+  "ts-node": {
+    "esm": true // Added for ts-node compatibility with ES Modules
+  },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
     "strictInjectionParameters": true,

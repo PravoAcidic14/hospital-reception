@@ -1,0 +1,68 @@
+/* Style for the main container of the component */
+h2 { /* Header for the component */
+    margin: 0;
+    font-size: 18px;                      
+    color: #004466;
+    padding-left: 20px;                  
+    padding-right: 20px;                
+    margin-bottom: 10px;                  
+  }
+     
+  /* Style for the filter input field */
+  mat-form-field {
+    width: 100%;
+    max-width: 300px;                    
+    margin: 0 20px 10px 20px;            
+  }
+     
+  /* Style the entire mat-table */
+  mat-table {
+    width: 100%;
+    background-color: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+     
+  /* Header row styling */
+  mat-header-row, mat-header-cell {
+    background-color: #004466;
+    color: white;
+    font-weight: bold;
+  }
+     
+  /* Header cell specifically */
+  mat-header-cell {
+    font-size: 14px;
+    padding: 12px 8px;  
+    text-align: center;
+  }
+     
+  /* Data rows styling */
+  mat-row {
+    border-bottom: 1px solid #1e0202;
+  }
+     
+  /* Data cells */
+  mat-cell {
+    padding: 12px 8px;  
+    text-align: center;
+    color:black
+  }
+     
+  /* Optional hover effect on row */
+  mat-row:hover {
+    background-color: #f1f1f1;
+  }
+  
+  button {
+    background-color: white;  /* dark blue like your header */
+    color: #004466;               /* this is the button content color */
+    border: none;
+    padding: 10px 20px;        /* padding for the button */
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: #004466;  /* lighter on hover */
+  }
