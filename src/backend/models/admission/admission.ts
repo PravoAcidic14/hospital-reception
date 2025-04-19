@@ -19,4 +19,5 @@ const admissionSchema = new mongoose.Schema({
   }
 );
 
-module.exports = mongoose.model("Admission", admissionSchema);
+const Admission = mongoose.model("Admission", admissionSchema);
+export default Admission;
