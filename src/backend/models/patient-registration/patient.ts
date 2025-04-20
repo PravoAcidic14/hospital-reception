@@ -6,7 +6,7 @@ const registrationSchema = new mongoose.Schema({
   gender: { type: String, required: true },
   nationalID: { type: String, required: true },
   contact: { type: String, required: true },
-  email: { type: String, required: true },
+  email: { type: String, required: false },
   address: { type: String, required: true },
   emergencyContact: { type: String, required: true },
   emergencyRelationship: { type: String, required: true },
