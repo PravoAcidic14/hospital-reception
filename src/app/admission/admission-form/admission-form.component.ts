@@ -73,7 +73,6 @@ export class AdmissionFormComponent implements OnInit {
       this.filteredAdmissions = admissions;
     });
   
-    // 👇 Add this part to listen for edit mode
     this.admissionService.getEditAdmission().subscribe((admission: Admission | null) => {
       if (admission) {
         this.admission = { ...admission };

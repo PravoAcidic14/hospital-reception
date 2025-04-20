@@ -33,13 +33,13 @@ export class PatientService {
 
   //Adding a new patient
   addPatient(patient: Patient) {
-    this.http.post<any>(this.apiUrl, patient)
+    this.http.post<any>(`${this.apiUrl}/create-patient`, patient)
       .subscribe((responseData) => {
-        const newPatient = { ...patient,id: responseData._id || responseData.id }; // Map _id to patientId
-        this.patients.push(newPatient); // Add the new patient to the local array
-        this.patientUpdated.next([...this.patients]); // Emit the updated patients list
+        const newPatient = { ...patient, id: responseData._id || responseData.id };
+        this.patients.push(newPatient);
+        this.patientUpdated.next([...this.patients]);
       });
-  }
+  }  
 
   //Deleting a patient by its ID
   deletePatient(id: string) {
@@ -60,11 +60,11 @@ export class PatientService {
       });
   }
 
-  //Listening for updates to the patients data
+  //Liatening for updates to the patients data
   getPatientUpdateListener() {
     return this.patientUpdated.asObservable(); // Return an observable for patient updates
   }
-  //Selecting a patient for viewing or editing
+  //Selecting a claim for viewing or editing
   setEditPatient(patient: Patient) {
     this.editPatientSubject.next(patient); 
   }

@@ -20,7 +20,7 @@ import { Subscription } from 'rxjs'; // Import Subscription for managing subscri
 @Component({
   selector: 'app-patient-registration-form', // Selector for the component
   templateUrl: 'patient-registration-form.component.html', // Template URL for the component
-  styleUrls: ['patient-registration-form.component.css'], // Stylesheet URL for the component
+  styleUrl: 'patient-registration-form.component.css', // Stylesheet URL for the component
   standalone: true, // Indicates that this component is standalone and can be used without being declared in an NgModule
   imports: [ // Importing necessary modules for the component
     FormsModule,
@@ -108,7 +108,7 @@ export class PatientRegistrationFormComponent implements OnInit, OnDestroy {
   // This is used to reset the form after successful registration
   private createEmptyPatient(): Patient { 
     return {
-      id: undefined,
+      id: undefined, // ID is set to null initially
       name: '',
       dob: '',
       gender: '',

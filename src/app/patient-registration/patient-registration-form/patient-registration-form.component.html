@@ -1,107 +1,107 @@
 <!-- Patient Registration Form Component-->
 <!-- Section Header -->
 <div class="form-header">
-    <h2>Patient Registration Form</h2>
-    <p>Please fill in the form below to register a new patient.</p>
-  </div>
-  
-  <!-- Patient Registration Form -->
-  <mat-card class="form-box"> <!-- Card for the form -->
-    <form #patientForm="ngForm" (ngSubmit)="registerPatient(patientForm)" class="form-content">
-  
-      <!-- Full Name -->
-      <mat-form-field appearance="fill" class="full-width">
-        <mat-label>Full Name</mat-label>
-        <input matInput type="text" name="name" [(ngModel)]="patient.name" #name="ngModel" required>
-        <mat-error *ngIf="name.invalid && name.touched">Full Name is required.</mat-error>
+  <h2>Patient Registration</h2>
+  <p>Please fill in the form below to register a new patient.</p>
+</div>
+
+<!-- Patient Registration Form -->
+<mat-card class="form-box"> <!-- Card for the form -->
+  <form #patientForm="ngForm" (ngSubmit)="registerPatient(patientForm)" class="form-content">
+
+    <!-- Full Name -->
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Full Name</mat-label>
+      <input matInput type="text" name="name" [(ngModel)]="patient.name" #name="ngModel" required>
+      <mat-error *ngIf="name.invalid && name.touched">Full Name is required.</mat-error>
+    </mat-form-field>
+
+    <!-- Date of Birth & Gender -->
+    <div class="row">
+      <mat-form-field appearance="fill" class="half-width">
+        <mat-label>Date of Birth</mat-label>
+        <input matInput [matDatepicker]="dobPicker" name="dob" [(ngModel)]="patient.dob" #dob="ngModel" required>
+        <mat-datepicker-toggle matSuffix [for]="dobPicker"></mat-datepicker-toggle>
+        <mat-datepicker #dobPicker></mat-datepicker> <!-- Datepicker for selecting date -->
+        <mat-error *ngIf="dob.invalid && dob.touched">Date of Birth is required.</mat-error> 
+        <!-- Error message if dob is invalid and touched -->
       </mat-form-field>
-  
-      <!-- Date of Birth & Gender -->
-      <div class="row">
-        <mat-form-field appearance="fill" class="half-width">
-          <mat-label>Date of Birth</mat-label>
-          <input matInput [matDatepicker]="dobPicker" name="dob" [(ngModel)]="patient.dob" #dob="ngModel" required>
-          <mat-datepicker-toggle matSuffix [for]="dobPicker"></mat-datepicker-toggle>
-          <mat-datepicker #dobPicker></mat-datepicker> <!-- Datepicker for selecting date -->
-          <mat-error *ngIf="dob.invalid && dob.touched">Date of Birth is required.</mat-error> 
-          <!-- Error message if dob is invalid and touched -->
-        </mat-form-field>
-  
-        <!--Gender-->
-        <mat-form-field appearance="fill" class="half-width">
-          <mat-label>Gender</mat-label>
-          <mat-select name="gender" [(ngModel)]="patient.gender" #gender="ngModel" required>
-            <mat-option value="" disabled>Select Gender</mat-option> <!-- Placeholder option -->
-            <mat-option value="Male">Male</mat-option>
-            <mat-option value="Female">Female</mat-option>
-          </mat-select>
-          <mat-error *ngIf="gender.invalid && gender.touched">Gender is required.</mat-error>
-        </mat-form-field>
-      </div>
-  
-      <!-- National ID & Contact -->
-      <div class="row">
-        <mat-form-field appearance="fill" class="half-width">
-          <mat-label>National ID / Passport</mat-label>
-          <input matInput type="text" name="nationalID" [(ngModel)]="patient.nationalID" #nationalID="ngModel" required>
-          <mat-error *ngIf="nationalID.invalid && nationalID.touched">National ID / Passport is required.</mat-error>
-        </mat-form-field>
-        
-        <!-- Contact Number -->
-        <mat-form-field appearance="fill" class="half-width">
-          <mat-label>Contact Number</mat-label>
-          <input matInput type="tel" name="contact" [(ngModel)]="patient.contact" #contact="ngModel" required>
-          <mat-error *ngIf="contact.invalid && contact.touched">Contact Number is required.</mat-error>
-        </mat-form-field>
-      </div>
-  
-      <!-- Email & Address -->
-      <mat-form-field appearance="fill" class="full-width">
-        <mat-label>Email (optional)</mat-label> <!-- Optional field for email -->
-        <input matInput type="email" name="email" [(ngModel)]="patient.email" #email="ngModel">
-        <mat-error *ngIf="email.invalid && email.touched">Please enter a valid email address.</mat-error>
+
+      <!--Gender-->
+      <mat-form-field appearance="fill" class="half-width">
+        <mat-label>Gender</mat-label>
+        <mat-select name="gender" [(ngModel)]="patient.gender" #gender="ngModel" required>
+          <mat-option value="" disabled>Select Gender</mat-option> <!-- Placeholder option -->
+          <mat-option value="Male">Male</mat-option>
+          <mat-option value="Female">Female</mat-option>
+        </mat-select>
+        <mat-error *ngIf="gender.invalid && gender.touched">Gender is required.</mat-error>
+      </mat-form-field>
+    </div>
+
+    <!-- National ID & Contact -->
+    <div class="row">
+      <mat-form-field appearance="fill" class="half-width">
+        <mat-label>National ID / Passport</mat-label>
+        <input matInput type="text" name="nationalID" [(ngModel)]="patient.nationalID" #nationalID="ngModel" required>
+        <mat-error *ngIf="nationalID.invalid && nationalID.touched">National ID / Passport is required.</mat-error>
       </mat-form-field>
       
-      <!-- Address -->
-      <mat-form-field appearance="fill" class="full-width">
-        <mat-label>Home Address</mat-label>
-        <textarea matInput name="address" [(ngModel)]="patient.address" #address="ngModel" required></textarea>
-        <mat-error *ngIf="address.invalid && address.touched">Home Address is required.</mat-error>
+      <!-- Contact Number -->
+      <mat-form-field appearance="fill" class="half-width">
+        <mat-label>Contact Number</mat-label>
+        <input matInput type="tel" name="contact" [(ngModel)]="patient.contact" #contact="ngModel" required>
+        <mat-error *ngIf="contact.invalid && contact.touched">Contact Number is required.</mat-error>
       </mat-form-field>
-  
-      <!-- Emergency Contact Name & Relationship -->
-      <div class="row">
-        <mat-form-field appearance="fill" class="half-width">
-          <mat-label>Emergency Contact Name</mat-label>
-          <input matInput type="text" name="emergencyContact" [(ngModel)]="patient.emergencyContact" #emergencyContact="ngModel" required>
-          <mat-error *ngIf="emergencyContact.invalid && emergencyContact.touched">Emergency Contact Name is required.</mat-error>
-        </mat-form-field>
-        
-        <!-- Emergency Relationship -->
-        <mat-form-field appearance="fill" class="half-width">
-          <mat-label>Relationship</mat-label>
-          <input matInput type="text" name="emergencyRelationship" [(ngModel)]="patient.emergencyRelationship" #emergencyRelationship="ngModel" required>
-          <mat-error *ngIf="emergencyRelationship.invalid && emergencyRelationship.touched">Relationship is required.</mat-error>
-        </mat-form-field>
-      </div>
-  
-      <!-- Emergency Phone -->
-      <mat-form-field appearance="fill" class="full-width">
-        <mat-label>Emergency Phone</mat-label>
-        <input matInput type="tel" name="emergencyPhone" [(ngModel)]="patient.emergencyPhone" #emergencyPhone="ngModel" required>
-        <mat-error *ngIf="emergencyPhone.invalid && emergencyPhone.touched">Emergency Phone is required.</mat-error>
+    </div>
+
+    <!-- Email & Address -->
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Email (optional)</mat-label> <!-- Optional field for email -->
+      <input matInput type="email" name="email" [(ngModel)]="patient.email" #email="ngModel">
+      <mat-error *ngIf="email.invalid && email.touched">Please enter a valid email address.</mat-error>
+    </mat-form-field>
+    
+    <!-- Address -->
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Home Address</mat-label>
+      <textarea matInput name="address" [(ngModel)]="patient.address" #address="ngModel" required></textarea>
+      <mat-error *ngIf="address.invalid && address.touched">Home Address is required.</mat-error>
+    </mat-form-field>
+
+    <!-- Emergency Contact Name & Relationship -->
+    <div class="row">
+      <mat-form-field appearance="fill" class="half-width">
+        <mat-label>Emergency Contact Name</mat-label>
+        <input matInput type="text" name="emergencyContact" [(ngModel)]="patient.emergencyContact" #emergencyContact="ngModel" required>
+        <mat-error *ngIf="emergencyContact.invalid && emergencyContact.touched">Emergency Contact Name is required.</mat-error>
       </mat-form-field>
-  
-      <!-- Submit Button -->
-      <div class="button-container">
-        <button mat-raised-button color="primary" type="submit" [disabled]="patientForm.invalid"> 
-          Register 
-        </button> 
-      </div>
-  
-    </form>
-  </mat-card>
-  
-  <!-- Patient Table Display -->
-  <hr />
-  <app-patient-table [patients]="patients"></app-patient-table>
+      
+      <!-- Emergency Relationship -->
+      <mat-form-field appearance="fill" class="half-width">
+        <mat-label>Relationship</mat-label>
+        <input matInput type="text" name="emergencyRelationship" [(ngModel)]="patient.emergencyRelationship" #emergencyRelationship="ngModel" required>
+        <mat-error *ngIf="emergencyRelationship.invalid && emergencyRelationship.touched">Relationship is required.</mat-error>
+      </mat-form-field>
+    </div>
+
+    <!-- Emergency Phone -->
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Emergency Phone</mat-label>
+      <input matInput type="tel" name="emergencyPhone" [(ngModel)]="patient.emergencyPhone" #emergencyPhone="ngModel" required>
+      <mat-error *ngIf="emergencyPhone.invalid && emergencyPhone.touched">Emergency Phone is required.</mat-error>
+    </mat-form-field>
+
+    <!-- Submit Button -->
+    <div class="button-container">
+      <button mat-raised-button color="primary" type="submit" [disabled]="patientForm.invalid"> 
+        Register 
+      </button> 
+    </div>
+
+  </form>
+</mat-card>
+
+<!-- Patient Table Display -->
+<hr />
+<app-patient-table [patients]="patients"></app-patient-table>

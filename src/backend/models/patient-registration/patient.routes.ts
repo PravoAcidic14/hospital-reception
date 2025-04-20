@@ -5,19 +5,17 @@ const registrationRouter = express.Router();
 registrationRouter.use(express.json());
 
 // POST: Add a patient
-registrationRouter.post('/', async (req, res) => {
+registrationRouter.post('/create-patient', async (req, res) => {
   try {
     const patient = new Registration(req.body);
     await patient.save();
     res.status(201).json(patient);
-    return;
   } catch (error) {
     if (error instanceof Error) {
       res.status(500).json({ error: error.message });
     } else {
       res.status(500).json({ error: 'Unknown error occurred' });
     }
-    return;
   }
 });
 
